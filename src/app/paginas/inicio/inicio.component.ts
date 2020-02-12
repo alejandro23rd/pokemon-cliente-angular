@@ -9,21 +9,25 @@ import { PokemonService } from 'src/app/services/pokemon.service';
 })
 export class InicioComponent implements OnInit {
 
-  pokemon: Pokemon;
+  pokemon: Array<Pokemon>;
 
-  constructor( private pokemonService: PokemonService) {
+  constructor(private pokemonService: PokemonService) {
 
     console.trace('PokemonRestComponent constructor');
-    this.pokemon = new Pokemon('');
+    this.pokemon = [];
 
-   // this.pokemon.nombre = '';  // setter
     console.debug(this.pokemon);
 
   }
 
-  ngOnInit() {
+  ngOnInit()
+  {
     console.trace('PokemonRestComponent ngOnInit');
 
-  }
+    this.pokemonService.getAll().subscribe(data => {
+    this.pokemon = data;
+    })
+
+  }//ngOnInit
 
 }

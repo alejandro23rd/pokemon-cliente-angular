@@ -9,7 +9,7 @@
   },
   {
     "id": 2,
-    "titulo": "char",
+    "nombre": "char",
     "habilidades": [
       "fuego",
       "ascuas"
@@ -17,7 +17,7 @@
   },
   {
     "id": 3,
-    "titulo": "squir",
+    "nombre": "squir",
     "habilidades": [
       "agua",
       "rayo burbuja"
@@ -25,7 +25,7 @@
   },
   {
     "id": 4,
-    "titulo": "magi",
+    "nombre": "magi",
     "habilidades": [
       "nada",
       "nada de nada"

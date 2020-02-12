@@ -3,21 +3,18 @@
 {{pokemon | json}}
 
 <div class="row">
-    <p>Aqui debemos colocar el filtro por nombre y despues el filtro habilidades Lorem ipsum dolor sit amet consectetur adipisicing elit. In eligendi vitae consectetur quas tenetur laboriosam dolore minima saepe deserunt porro mollitia, aut ducimus, nostrum temporibus doloribus quo id placeat natus!</p>
     <div class="col">
         <h2>Listado de todos los pokemon</h2>
         <ul>
-            <li *ngFor="let pokemon of pokemon">      
-                <b>{{pokemon.nombre}}</b>
-            </li>
+            <li *ngFor="let pokemon of pokemon">{{pokemon.nombre}}</li>
         </ul>
     </div>
-    <div class="col"> 
+    <div class="col">
         <h2>Detalle de cada pokemon</h2>
         <ol>
-            <h3>ID: {{pokemon.id}} - {{pokemon.nombre}}</h3>
+            <h3>Id - nombre</h3>
             <h4>Habilidades</h4>
-            <li *ngFor="let h of pokemon.habilidades">{{h}}</li>
+            <li> listado de las habilidades</li>
         </ol>
     </div>
 </div>

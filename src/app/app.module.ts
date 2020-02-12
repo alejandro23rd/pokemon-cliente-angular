@@ -13,6 +13,7 @@ import { Error404Component } from './paginas/error404/error404.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { PrivadoComponent } from './paginas/privado/privado.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
