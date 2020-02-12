@@ -1,0 +1,51 @@
+{
+  "pokemon": [{
+    "id": 1,
+    "nombre": "pika",
+    "habilidades": [
+      "electicidad",
+      "manta electrica"
+    ]
+  },
+  {
+    "id": 2,
+    "titulo": "char",
+    "habilidades": [
+      "fuego",
+      "ascuas"
+    ]
+  },
+  {
+    "id": 3,
+    "titulo": "squir",
+    "habilidades": [
+      "agua",
+      "rayo burbuja"
+    ]
+  },
+  {
+    "id": 4,
+    "titulo": "magi",
+    "habilidades": [
+      "nada",
+      "nada de nada"
+    ]
+  }],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
