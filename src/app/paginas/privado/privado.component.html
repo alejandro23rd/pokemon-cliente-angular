@@ -1,1 +1,36 @@
-<p>privado works!</p>
+<h1>BackOffice / zona privada</h1>
+<h2>Creacion, modificacion y eliminacion de los pokemons de nuestro db.json</h2>
+
+<div class="container">
+   
+    <!-- mensajes para el usuario -->
+    <div *ngIf="showMensaje" class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{mensaje}}
+        <button (click)="showMensaje = !showMensaje" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+     <!-- crear una nueva tarea -->
+    <div class="container-tareas">
+
+        <!--
+        <div class="crear">
+            <input type="text" [(ngModel)]="nombreNuevo" class="form-control" placeholder="Nombre del nuevo pokemon" >
+            <button (click)="nuevoPokemon()" class="btn btn-primary">Crear</button>
+        </div>
+        -->
+
+     <!-- listar las tareas -->
+        <ul>
+            <li *ngFor="let p of pokemon">
+                <input type="text" [(ngModel)]="p.nombre">
+                <button (click)="eliminar(p)" class="btn btn-outline-danger">Eliminar</button>
+            </li>
+        </ul>
+
+    </div>
+    <!-- /.container-tareas -->    
+
+</div>    
+<!-- /.container -->    
