@@ -30,4 +30,10 @@ export class InicioComponent implements OnInit {
 
   }//ngOnInit
 
+  seleccionarPokemon = function (pokemon) {
+    console.log("seleccionarReceta(" + pokemon.id + " " + pokemon.nombre + ")");
+    
+    this.pokemonSeleccionado = pokemon;
+    }// seleccionarReceta
+
 }
