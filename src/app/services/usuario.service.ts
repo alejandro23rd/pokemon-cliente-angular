@@ -22,7 +22,7 @@ export class UsuarioService implements IUsuarioService {
 
 
   estaLogeado(): boolean {
-    console.trace('UsuarioService estaLogeado');
+    //console.trace('UsuarioService estaLogeado');
     if ( this.storage.getItem('usuarioStorage') ) {
       return true;
     } else {

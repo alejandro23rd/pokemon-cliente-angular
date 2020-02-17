@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/model/pokemon';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { isUndefined } from 'util';
 
 @Component({
   selector: 'app-privado',
@@ -20,6 +21,9 @@ export class PrivadoComponent implements OnInit {
   mensaje: string;
   showMensaje: boolean;
 
+  //crear nuevo pokemon
+  nombreNuevo: string;
+
   constructor(private servicioPokemon : PokemonService, private builder: FormBuilder) {
     console.trace('PrivadoComponent constructor');
     console.debug(this.pokemon);
@@ -29,6 +33,8 @@ export class PrivadoComponent implements OnInit {
       id: new FormControl(0),
       nombre: new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(50)])
     });
+
+    this.nombreNuevo = '';
 
   }//constructor
 
@@ -40,7 +46,7 @@ export class PrivadoComponent implements OnInit {
 
 
   seleccionarPokemon = function (pokemon) {
-    console.log("seleccionarReceta(" + pokemon.id + " " + pokemon.nombre + ")");
+    console.log("seleccionarPokemon(" + pokemon.id + " " + pokemon.nombre + ")");
     
     this.pokemonSeleccionado = pokemon;
     this.rellenarDatos();
@@ -78,11 +84,6 @@ export class PrivadoComponent implements OnInit {
 
   }// eliminar
 
-
-  enviar(formData){
-    console.debug('click en enviar %0', formData);
-  }
-
   rellenarDatos() {
     console.debug('click rellenarDatos');
 
@@ -91,4 +92,38 @@ export class PrivadoComponent implements OnInit {
     this.formulario.get('nombre').setValue( this.pokemonSeleccionado.nombre);
 
   }
+
+  getID(formData){
+    console.debug('coge el getID %o', formData);
+
+    if(!this.pokemonSeleccionado){
+      this.pokemonSeleccionado = new Pokemon();
+      this.pokemonSeleccionado.nombre = formData.nombre;
+      this.crear(this.pokemonSeleccionado);
+
+    }else{
+      this.pokemonSeleccionado.nombre = formData.nombre;
+      this.modificar(this.pokemonSeleccionado);
+    }
+    
+  }//getID
+
+  crear(pokemon : Pokemon){
+    console.trace('Entra a crear');
+
+    this.servicioPokemon.crearPokemon(pokemon).subscribe( data => {
+    console.debug('Nueva Pokemon creado %o', data);
+    this.cargarPokemon();
+    this.mensaje = 'Pokemon registrado con Exito!!!';
+    this.showMensaje = true;
+    });
+
+  }//crear
+
+  modificar(pokemon: Pokemon): void {
+    console.debug('loose focus para cambiar nombre %o', pokemon);
+    this.servicioPokemon.modificarPokemon(pokemon).subscribe( () => this.cargarPokemon());
+
+  }//modificar
+
 }

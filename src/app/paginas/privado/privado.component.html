@@ -9,7 +9,7 @@
                 <div class="input-group-append">
                   <span class="input-group-text">
                   <span class="fas fa-search"></span></span>
-                </div><!--input-group-append-->         
+                </div><!--input-group-append-->    
             </div><!--input-group-->
             <h2>Listado de todos los pokemon</h2>
             <ul>
@@ -30,15 +30,12 @@
             <ol>
                 <h3>{{pokemonSeleccionado?.id}}- {{pokemonSeleccionado?.nombre}}</h3>
             </ol>
-
-            <h2>Formulario</h2>
-            
-            {{ formulario.value | json }}
-            {{ formulario.status | json }}
-            <form [formGroup]="formulario" (ngSubmit)="enviar(formulario.value)">
+            <h2>Formulario</h2>       
+            {{ formulario.value | json }} {{ formulario.status | json }}
+            <form [formGroup]="formulario" (ngSubmit)="getID(formulario.value)">
                 Nombre: <input type="text"  formControlName="nombre">
-                <input type="submit" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Crear">
-            </form>
+                <input type="submit" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Crear/modificar">
+            </form><!--formulario-->
         </div><!--col-->
     </div><!--row-->
 </div><!--container-->
