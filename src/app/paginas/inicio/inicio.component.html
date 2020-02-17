@@ -2,37 +2,7 @@
 
 <h2>Churro json</h2>
 {{pokemon | json}}
-<div class="row">
-    <div class="col">
-        <h2>filtro por nombre:</h2>
-        <div class="input-group">
-            <input type="search" [(ngModel)]="busqueda" class="form-control" placeholder="Busca pokemon por nombre">
-            <div class="input-group-append">
-                <span class="input-group-text">
-                <span class="fas fa-search"></span></span>
-            </div>            
-        </div>
-    </div>
-    <div class="col">
-        <h2>filtro por habilidades:</h2>
-    </div>
-</div>
-<div class="row">
-    <div class="col">
-        <h2>Listado de todos los pokemon</h2>
-        <ul>
-            <li *ngFor="let p of pokemon | pokemonFiltro : busqueda" (click)="seleccionarPokemon(p)" class="list-group-item {{ (p==pokemonSeleccionado) ? 'active' : ''  }}">{{p.nombre}}</li>
-        </ul>
-    </div>
-    <div class="col">
-        <h2>Detalle de cada pokemon</h2>
-        <ol>
-            <h3>{{pokemonSeleccionado?.id}}- {{pokemonSeleccionado?.nombre}}</h3>
-            <h4>Habilidades</h4>
-            <!--<li *ngFor="let h of pokemonSeleccionado.habilidades">{{h}}</li>-->
-        </ol>
-    </div>
-</div>
+<b><p>Si deseas ver los (GET, POST, PUT y DELETE) deberas logearte e ir a la pagina BACKOFFICE</p></b>
 
 
 

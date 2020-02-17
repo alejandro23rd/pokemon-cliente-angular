@@ -1,36 +1,44 @@
 <h1>BackOffice / zona privada</h1>
-<h2>Creacion, modificacion y eliminacion de los pokemons de nuestro db.json</h2>
 
 <div class="container">
-   
-    <!-- mensajes para el usuario -->
-    <div *ngIf="showMensaje" class="alert alert-warning alert-dismissible fade show" role="alert">
-        {{mensaje}}
-        <button (click)="showMensaje = !showMensaje" type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Filtro por nombre:</h2>
+            <div class="input-group">
+                <input type="search" [(ngModel)]="busqueda" class="form-control" placeholder="Busca pokemon por nombre">
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                  <span class="fas fa-search"></span></span>
+                </div><!--input-group-append-->         
+            </div><!--input-group-->
+            <h2>Listado de todos los pokemon</h2>
+            <ul>
+                <li *ngFor="let p of pokemon | pokemonFiltro : busqueda" (click)="seleccionarPokemon(p)" class="list-group-item d-flex justify-content-between {{ (p==pokemonSeleccionado) ? 'active' : ''  }}">{{p.id}} - {{p.nombre}}
+                    <button (click)="eliminar(p)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                </li>
+            </ul>
+        </div><!--col-->
+        <div class="col">
+            <!-- mensajes para el usuario -->
+            <div *ngIf="showMensaje" class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{mensaje}}
+                <button (click)="showMensaje = !showMensaje" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <h2>Detalle de cada pokemon</h2>
+            <ol>
+                <h3>{{pokemonSeleccionado?.id}}- {{pokemonSeleccionado?.nombre}}</h3>
+            </ol>
 
-     <!-- crear una nueva tarea -->
-    <div class="container-tareas">
-
-        <!--
-        <div class="crear">
-            <input type="text" [(ngModel)]="nombreNuevo" class="form-control" placeholder="Nombre del nuevo pokemon" >
-            <button (click)="nuevoPokemon()" class="btn btn-primary">Crear</button>
-        </div>
-        -->
-
-     <!-- listar las tareas -->
-        <ul>
-            <li *ngFor="let p of pokemon">
-                <input type="text" [(ngModel)]="p.nombre">
-                <button (click)="eliminar(p)" class="btn btn-outline-danger">Eliminar</button>
-            </li>
-        </ul>
-
-    </div>
-    <!-- /.container-tareas -->    
-
-</div>    
-<!-- /.container -->    
+            <h2>Formulario</h2>
+            
+            {{ formulario.value | json }}
+            {{ formulario.status | json }}
+            <form [formGroup]="formulario" (ngSubmit)="enviar(formulario.value)">
+                Nombre: <input type="text"  formControlName="nombre">
+                <input type="submit" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Crear">
+            </form>
+        </div><!--col-->
+    </div><!--row-->
+</div><!--container-->
