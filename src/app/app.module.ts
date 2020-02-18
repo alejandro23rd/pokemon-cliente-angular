@@ -13,6 +13,7 @@ import { Error404Component } from './paginas/error404/error404.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { PrivadoComponent } from './paginas/privado/privado.component';
 import { PokemonPipe } from './pipes/pokemon.pipe';
+import { MensajesComponent } from './componentes/mensajes/mensajes.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { PokemonPipe } from './pipes/pokemon.pipe';
     Error404Component,
     LoginComponent,
     PrivadoComponent,
-    PokemonPipe
+    PokemonPipe,
+    MensajesComponent
   ],
   imports: [
     BrowserModule,
