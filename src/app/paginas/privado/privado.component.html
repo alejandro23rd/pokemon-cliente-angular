@@ -14,7 +14,7 @@
             <h2>Listado de todos los pokemon</h2>
             <ul>
                 <li *ngFor="let p of pokemon | pokemonFiltro : busqueda" (click)="seleccionarPokemon(p)" class="list-group-item d-flex justify-content-between {{ (p==pokemonSeleccionado) ? 'active' : ''  }}">{{p.id}} - {{p.nombre}}
-                    <button (click)="eliminar(p)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                    <button (click)="eliminarpokemon(p)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                 </li>
             </ul>
         </div><!--col-->
@@ -28,14 +28,23 @@
             </div>
             <h2>Detalle de cada pokemon</h2>
             <ol>
-                <h3>{{pokemonSeleccionado?.id}}- {{pokemonSeleccionado?.nombre}}</h3>
+                <h3>{{pokemonSeleccionado?.id}} - {{pokemonSeleccionado?.nombre}}</h3>
+                <img class="imagen" src="{{pokemonSeleccionado?.imagen}}">
             </ol>
-            <h2>Formulario</h2>       
+        </div><!--col-->
+        <div class="col">
+            <h2>Formulario de habilidades</h2>
             {{ formulario.value | json }} {{ formulario.status | json }}
-            <form [formGroup]="formulario" (ngSubmit)="getID(formulario.value)">
-                Nombre: <input type="text"  formControlName="nombre">
-                <input type="submit" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Crear/modificar">
-            </form><!--formulario-->
+        
+            <form [formGroup]="formulario">
+                Id: <input type="text" [ngModel]="id" formControlName="id"><br>
+                Nombre: <input type="text" [ngModel]="nombre" formControlName="nombre"><br>
+                Imagen: <input type="text" [ngModel]="imagen" formControlName="imagen">
+                <input type="submit" (click)="getID(formulario.value)" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Crear/modificar">
+              Selecciona habilidades: 
+              <li *ngFor="let h of habilidad" (click)="SeleccionarHabilidad(h)" class="{{(h.checked)? 'bg-success text-white' : 'bg-danger text-white'}} list-group-item d-flex justify-content-between" >{{h.id}} - {{h.nombre}}
+            </li>    
+            </form>
         </div><!--col-->
     </div><!--row-->
 </div><!--container-->
