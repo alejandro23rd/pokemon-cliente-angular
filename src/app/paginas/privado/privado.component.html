@@ -2,6 +2,7 @@
 
 <div class="container">
     <div class="row">
+        
         <div class="col">
             <h2>Filtro por nombre:</h2>
             <div class="input-group">
@@ -17,7 +18,9 @@
                     <button (click)="eliminarpokemon(p)" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
                 </li>
             </ul>
+            <button class="btn btn-primary btn-block mb-2" (click)="clear()">Limpiar Formulario</button>
         </div><!--col-->
+
         <div class="col">
             <!-- mensajes para el usuario -->
             <div *ngIf="showMensaje" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -37,13 +40,12 @@
             {{ formulario.value | json }} {{ formulario.status | json }}
         
             <form [formGroup]="formulario">
-                Id: <input type="text" [ngModel]="id" formControlName="id"><br>
                 Nombre: <input type="text" [ngModel]="nombre" formControlName="nombre"><br>
-                Imagen: <input type="text" [ngModel]="imagen" formControlName="imagen">
-                <input type="submit" (click)="getID(formulario.value)" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Crear/modificar">
+                Imagen: <input type="text" [ngModel]="imagen" formControlName="imagen"><br>
               Selecciona habilidades: 
               <li *ngFor="let h of habilidad" (click)="SeleccionarHabilidad(h)" class="{{(h.checked)? 'bg-success text-white' : 'bg-danger text-white'}} list-group-item d-flex justify-content-between" >{{h.id}} - {{h.nombre}}
-            </li>    
+            </li> 
+            <input type="submit" (click)="getID(formulario.value)" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Crear/modificar">   
             </form>
         </div><!--col-->
     </div><!--row-->

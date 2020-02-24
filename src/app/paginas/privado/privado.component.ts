@@ -43,13 +43,6 @@ export class PrivadoComponent implements OnInit {
     //constructor vacio de mensaje
     this.mensaje = '';
 
-    //constructor vacio del formulario de pokemons
-    this.formulario = this.fb.group({
-      id: new FormControl(0),
-      nombre: new FormControl('',[Validators.required, Validators.minLength(2), Validators.maxLength(50)])
-    });
-    this.nombreNuevo = '';
-
     //constructor vacio del formulario de habilidades
     this.crearFormulario();
 
@@ -66,12 +59,14 @@ export class PrivadoComponent implements OnInit {
 
 
   seleccionarPokemon = function (pokemon) {
-    console.log("seleccionarPokemon(" + pokemon.id + " " + pokemon.nombre + ")");
+    console.log("seleccionarPokemon(" + pokemon.id + " " + pokemon.nombre + " " + pokemon.imagen + ")");
     
     this.pokemonSeleccionado = pokemon;
-    this.formulario.get('nombre').setValue(this.pokemonSeleccionado.nombre); 
     this.rellenarDatos();
     this.cargarHabilidad();
+
+
+    
     
   }// seleccionarReceta
   
@@ -110,10 +105,23 @@ export class PrivadoComponent implements OnInit {
   rellenarDatos() {
     console.debug('click rellenarDatos');
 
+    this.crearFormulario();
+
     const controlId = this.formulario.get('id');
     controlId.setValue( this.pokemonSeleccionado.id);
     this.formulario.get('nombre').setValue( this.pokemonSeleccionado.nombre);
     this.formulario.get('imagen').setValue( this.pokemonSeleccionado.imagen);
+
+    //TODO relelnar habilidades
+    
+    this.pokemonSeleccionado.habilidades.forEach(element => {
+      const habilidad = this.crearFormGroupHabilidad();
+      habilidad.get('id').setValue( element.id );
+      habilidad.get('nombre').setValue( element.nombre );
+
+      this.formArrayHabilidades.push(habilidad);
+    });
+
 
   }
 
@@ -130,9 +138,7 @@ export class PrivadoComponent implements OnInit {
     }else{
       this.pokemonSeleccionado.nombre = formData.nombre;
       this.pokemonSeleccionado.imagen = formData.imagen;
-      this.pokemonSeleccionado.imagen = formData.imagen;
       this.modificar(this.pokemonSeleccionado);
-      
       
     }
     
@@ -200,9 +206,10 @@ export class PrivadoComponent implements OnInit {
     this.servicioHabilidad.getAllHabilidad().subscribe(
       datoshabilidad => {
 
+        //obtiene el listado de habilidades
         this.habilidad = datoshabilidad;
 
-        // TODO si hay un pokemon seleccionado, marcar las que estan chekeadas.
+        // si hay un pokemon seleccionado, selecciona sus habilidades
         if (this.pokemonSeleccionado) {
 
           this.habilidad = this.habilidad.map(h => {
@@ -250,4 +257,12 @@ export class PrivadoComponent implements OnInit {
               imagen: new FormControl('')
             });
   }//crearFormGroupHabilidad()
+
+  clear() {
+
+    this.crearFormulario();
+    this.pokemonSeleccionado = new Pokemon();
+    this.habilidad.map(el => el.checked = false);
+  }//Clear
+
 }
