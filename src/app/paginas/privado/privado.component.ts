@@ -130,6 +130,7 @@ export class PrivadoComponent implements OnInit {
     }else{
       this.pokemonSeleccionado.nombre = formData.nombre;
       this.pokemonSeleccionado.imagen = formData.imagen;
+      this.pokemonSeleccionado.imagen = formData.imagen;
       this.modificar(this.pokemonSeleccionado);
       
       
