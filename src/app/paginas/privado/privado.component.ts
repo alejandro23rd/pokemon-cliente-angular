@@ -64,10 +64,7 @@ export class PrivadoComponent implements OnInit {
     this.pokemonSeleccionado = pokemon;
     this.rellenarDatos();
     this.cargarHabilidad();
-
-
-    
-    
+  
   }// seleccionarReceta
   
 
@@ -128,7 +125,7 @@ export class PrivadoComponent implements OnInit {
   getID(formData){
     console.debug('coge el getID %o', formData);
 
-    if(!this.pokemonSeleccionado){
+    if(this.pokemonSeleccionado.id === 0){
       this.pokemonSeleccionado = new Pokemon();
       this.pokemonSeleccionado.nombre = formData.nombre;
       this.pokemonSeleccionado.imagen = formData.imagen;
@@ -147,21 +144,35 @@ export class PrivadoComponent implements OnInit {
   crear(pokemon : Pokemon){
     console.trace('Entra a crear');
 
-    this.servicioPokemon.crearPokemon(pokemon).subscribe( data => {
-    console.debug('Nueva Pokemon creado %o', data);
-    this.cargarPokemon();
-    this.mensaje = 'Pokemon registrado con Exito!!!';
-    this.showMensaje = true;
-    });
+    this.servicioPokemon.crearPokemon(pokemon).subscribe(
+      data => {
+        console.debug('pokemon creado ok %o', data);
+
+        this.cargarPokemon();
+        this.cargarHabilidad();
+        this.seleccionarPokemon(pokemon);
+      },
+      error => {
+        console.warn(error);
+      }
+    );
 
   }//crear
 
   modificar(pokemon: Pokemon): void {
     console.debug('loose focus para cambiar nombre %o', pokemon);
-    this.servicioPokemon.modificarPokemon(pokemon).subscribe( () => {
-      this.seleccionarPokemon(pokemon);
-      this.cargarPokemon();
-    }); 
+    this.servicioPokemon.modificarPokemon(pokemon).subscribe(
+      data => {
+        console.debug('elemento modificado ok %o', data);
+
+        this.cargarPokemon();
+        this.cargarHabilidad();
+        this.seleccionarPokemon(pokemon);
+      },
+      error => {
+        console.warn(error);
+      }
+    ); 
 
   }//modificar
 
@@ -233,7 +244,7 @@ export class PrivadoComponent implements OnInit {
       });
   }// cargarHabilidad
 
-  SeleccionarHabilidad( option: any ) {
+  seleccionarHabilidad( option: any ) {
     
     option.checked = !option.checked;
     console.debug('checkCambiado %o', option);

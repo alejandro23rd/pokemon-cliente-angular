@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        
+
         <div class="col">
             <h2>Filtro por nombre:</h2>
             <div class="input-group">
@@ -35,6 +35,7 @@
                 <img class="imagen" src="{{pokemonSeleccionado?.imagen}}">
             </ol>
         </div><!--col-->
+
         <div class="col">
             <h2>Formulario de habilidades</h2>
             {{ formulario.value | json }} {{ formulario.status | json }}
@@ -43,7 +44,7 @@
                 Nombre: <input type="text" [ngModel]="nombre" formControlName="nombre"><br>
                 Imagen: <input type="text" [ngModel]="imagen" formControlName="imagen"><br>
               Selecciona habilidades: 
-              <li *ngFor="let h of habilidad" (click)="SeleccionarHabilidad(h)" class="{{(h.checked)? 'bg-success text-white' : 'bg-danger text-white'}} list-group-item d-flex justify-content-between" >{{h.id}} - {{h.nombre}}
+              <li *ngFor="let h of habilidad" (click)="seleccionarHabilidad(h)" class="{{(h.checked)? 'bg-success text-white' : 'bg-danger text-white'}} list-group-item d-flex justify-content-between" >{{h.id}} - {{h.nombre}}
             </li> 
             <input type="submit" (click)="getID(formulario.value)" [disabled]="formulario.invalid" class="btn btn-primary btn-block" value="Crear/modificar">   
             </form>
