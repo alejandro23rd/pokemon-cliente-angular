@@ -16,6 +16,9 @@ export class PrivadoComponent implements OnInit {
   //variables de pokemon
   pokemon: Array<Pokemon>;
   pokemonSeleccionado: any;
+
+  //variable busqueda
+  busqueda: string;
   
 
   //variables de formulario
@@ -36,6 +39,8 @@ export class PrivadoComponent implements OnInit {
   constructor(private servicioPokemon : PokemonService, private servicioHabilidad : HabilidadService, private fb: FormBuilder ) {
     console.trace('PrivadoComponent constructor');
     
+    this.busqueda = '';
+
     //constructor vacio de pokemon
     console.debug(this.pokemon);
     this.pokemon = [];

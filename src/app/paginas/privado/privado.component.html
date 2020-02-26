@@ -38,11 +38,11 @@
 
         <div class="col">
             <h2>Formulario de habilidades</h2>
-            {{ formulario.value | json }} {{ formulario.status | json }}
+            {{formulario.value | json}}
         
             <form [formGroup]="formulario">
-                Nombre: <input type="text" [ngModel]="nombre" formControlName="nombre"><br>
-                Imagen: <input type="text" [ngModel]="imagen" formControlName="imagen"><br>
+                Nombre: <input type="text" formControlName="nombre"><br>
+                Imagen: <input type="text" formControlName="imagen"><br>
               Selecciona habilidades: 
               <li *ngFor="let h of habilidad" (click)="seleccionarHabilidad(h)" class="{{(h.checked)? 'bg-success text-white' : 'bg-danger text-white'}} list-group-item d-flex justify-content-between" >{{h.id}} - {{h.nombre}}
             </li> 

@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
 
   rutas: Array<any>;
 
-  constructor(private router: Router, private usuarioService: UsuarioService) {
+  constructor(private router: Router, public usuarioService: UsuarioService) {
     console.trace('NavbarComponent constructor');
     this.rutas = RUTAS;
   }// constructor
