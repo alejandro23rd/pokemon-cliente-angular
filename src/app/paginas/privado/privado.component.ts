@@ -127,20 +127,18 @@ export class PrivadoComponent implements OnInit {
 
   }
 
-  getID(formData){
-    console.debug('coge el getID %o', formData);
+  getID(pokemon){
+    console.debug('coge el getID %o', pokemon);
 
     if(this.pokemonSeleccionado.id === 0){
-      this.pokemonSeleccionado = new Pokemon();
-      this.pokemonSeleccionado.nombre = formData.nombre;
-      this.pokemonSeleccionado.imagen = formData.imagen;
-      this.crear(this.pokemonSeleccionado);
+
+
+      this.crear(pokemon);
       
 
     }else{
-      this.pokemonSeleccionado.nombre = formData.nombre;
-      this.pokemonSeleccionado.imagen = formData.imagen;
-      this.modificar(this.pokemonSeleccionado);
+
+      this.modificar(pokemon);
       
     }
     
@@ -173,6 +171,7 @@ export class PrivadoComponent implements OnInit {
         this.cargarPokemon();
         this.cargarHabilidad();
         this.seleccionarPokemon(pokemon);
+        console.debug(pokemon);
       },
       error => {
         console.warn(error);
